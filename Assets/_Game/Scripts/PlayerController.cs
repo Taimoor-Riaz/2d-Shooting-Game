@@ -5,13 +5,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private FloatingJoystick floatingJoystick;
-    [SerializeField] private float playerSpeed;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Vector3 cameraOffset = Vector3.zero;
-
+    [SerializeField] private PlayerSC playerSC;
+    private float playerSpeed;
+    [SerializeField] private SpriteRenderer playerSprite;
+    [SerializeField] private Animator playerAnim;
     private void Start()
     {
         if (playerCamera == null) { playerCamera = Camera.main; }
+        playerSpeed = playerSC.playerSpeed;
+        playerSprite.sprite = playerSC.playerSprite;
+        playerAnim.runtimeAnimatorController = playerSC.playerAnimator;
     }
     private void FixedUpdate()
     {
@@ -23,6 +28,18 @@ public class PlayerController : MonoBehaviour
         playerPosition = new Vector3(playerPosition.x + moveX, playerPosition.y + moveY, playerPosition.z);
         transform.position = playerPosition;
         playerCamera.transform.position = new Vector3(playerPosition.x,playerPosition.y,cameraPosition.z)+cameraOffset;
+        if (moveX < 0)
+        {
+            playerSprite.flipX = true; 
+        }
+        else if (moveX > 0)
+        {
+            playerSprite.flipX = false; 
+        }
 
+        float movementMagnitude = new Vector2(moveX, moveY).magnitude;
+
+     
+        playerAnim.SetFloat("Speed", movementMagnitude);
     }
 }
