@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private float playerSpeed;
     [SerializeField] private SpriteRenderer playerSprite;
     [SerializeField] private Animator playerAnim;
+   public static Action<bool> OnPlayerFlip;
+
     private void Start()
     {
         if (playerCamera == null) { playerCamera = Camera.main; }
@@ -30,11 +33,13 @@ public class PlayerController : MonoBehaviour
         playerCamera.transform.position = new Vector3(playerPosition.x,playerPosition.y,cameraPosition.z)+cameraOffset;
         if (moveX < 0)
         {
-            playerSprite.flipX = true; 
+            playerSprite.flipX = true;
+            OnPlayerFlip?.Invoke(true);
         }
         else if (moveX > 0)
         {
             playerSprite.flipX = false; 
+            OnPlayerFlip?.Invoke(false);
         }
 
         float movementMagnitude = new Vector2(moveX, moveY).magnitude;
