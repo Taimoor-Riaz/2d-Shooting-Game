@@ -6,10 +6,8 @@ public class GunSC : ScriptableObject
 {
     public GunType gunType;
     public int bulletsPerShot;      
-    public float nextFireTime;        
-    public float bulletDamage;        
-    public float bulletDestroyTime;   
-    public GameObject bulletPrefab;
+    public float nextFireTime;
+    public BulletSC bulletSC;
 }
 
 public enum GunType

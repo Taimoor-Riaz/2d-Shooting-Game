@@ -15,6 +15,4 @@ MonoBehaviour:
   gunType: 1
   bulletsPerShot: 5
   nextFireTime: 0.5
-  bulletDamage: 0
-  bulletDestroyTime: 1.5
-  bulletPrefab: {fileID: 0}
+  bulletSC: {fileID: 11400000, guid: f4dcc576171ca5044b06d00e993b2b38, type: 2}

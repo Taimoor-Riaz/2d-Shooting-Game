@@ -48,3 +48,5 @@ public class PlayerController : MonoBehaviour
         playerAnim.SetFloat("Speed", movementMagnitude);
     }
 }
+
+
